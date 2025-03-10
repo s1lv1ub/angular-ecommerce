@@ -1,0 +1,8 @@
+<div class="form-header" >
+    <input #myImput type="text" placeholder="Search for products ..."  class="au-input au-input-xl"
+           (keyup.enter)="doSearch(myImput.value)"/>
+
+    <button (click)="doSearch(myImput.value)" class="au-btn-submit" type="submit">
+      Search
+    </button>
+</div> 
