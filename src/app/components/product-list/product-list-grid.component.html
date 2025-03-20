@@ -5,13 +5,39 @@
                 <!-- Lopping over products-->
                  <div *ngFor="let product of products" class="col-md-4">
                     <div class="product-box">
-                     <img src="{{product.imageUrl}}" class="img-responsive">
-                     <h1>{{product.name}}</h1>
-                     <div class="price">${{product.unitPrice}}</div>
-                     <a href="#" class="primary-btn">Add to cart</a>
+                        <a routerLink="/products/{{product.id}}">
+                            <img src="{{product.imageUrl}}" class="img-responsive"> 
+                        </a>
+                        <a routerLink="/products/{{product.id}}">
+                            <h1>{{product.name}}</h1>
+                        </a>
+                         <div class="price">${{product.unitPrice}}</div>
+                         <button  (click)="addToCart(product)" class="btn btn-primary btn-sm">Add to cart</button>
                     </div>
 
             </div>
+            <!-- begin footer-->
+            <div class="footer-pagination">
+                <div class="row"> 
+                  <div class="col-md-6"></div>
+
+                  <div class="col-md-6">  
+                    <div class="row">
+
+                      <div class="col-md-9" style="padding-left: 30%">
+
+                          <ngb-pagination [(page)]="thePageNumber"
+                                           [pageSize]="thePageSize" 
+                                           [collectionSize]="theTotalElements"
+                                           (pageChange)="listProducts()">
+                         </ngb-pagination>
+                      </div>
+                    </div>
+                  </div>
+                </div>    
+                </div>
+            <!-- end footer-->
+
         </div>
     </div>
 

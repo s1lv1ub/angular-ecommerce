@@ -8,6 +8,7 @@ import { ProductCategory } from '../common/product-category';
   providedIn: 'root'
 })
 export class ProductService {
+  
  
 
   
@@ -16,6 +17,21 @@ export class ProductService {
   private  categoryUrl ='http://localhost:8080/api/product-category';
 
   constructor(private httpClient: HttpClient) { }
+
+  getProduct(theProductId: number): Observable<Product> {
+  //  build url based on product id
+    const productUrl=`${this.baseUrl}/${theProductId}`;
+
+    return this.httpClient.get<Product>(productUrl);
+  }
+
+  getProductListPaginate(thePage: number, 
+                        thePageSize: number, 
+                        theCategoryId: number): Observable<GetResponseProduct>{
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}+&page=${thePage}&size=${thePageSize}`;
+    
+    return this.httpClient.get<GetResponseProduct>(searchUrl);
+  }
 
   getProductList(theCategoryId: number): Observable<Product[]>{
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
@@ -46,6 +62,12 @@ export class ProductService {
   interface GetResponseProduct{
     _embedded: {
       products: Product[];
+    }
+    page: {
+      size: number,
+      totalElements: number,
+      totalPages: number,
+      number: number
     }
 }
 

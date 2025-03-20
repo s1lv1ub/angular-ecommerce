@@ -11,8 +11,12 @@ import { ProductService } from './services/product.service';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from './components/search/search.component';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
+  {path:'products/:id', component: ProductDetailsComponent},
   {path:'search/:keyword', component: ProductListComponent},
   {path:'category/:id', component: ProductListComponent},
   {path:'category', component: ProductListComponent},
@@ -25,7 +29,9 @@ const routes: Routes = [
     AppComponent,
     ProductListComponent,
     ProductCategoryMenuComponent,
-    SearchComponent
+    SearchComponent,
+    CartStatusComponent,
+    ProductDetailsComponent
 
   ],
   imports: [
@@ -33,6 +39,7 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     CommonModule ,
+    NgbModule
  
 ],
   providers: [ProductService],
