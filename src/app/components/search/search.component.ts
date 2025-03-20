@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
   constructor(private router: Router) { }
-  
+
   doSearch(keyword: string) {
     console.log(`value=${keyword}`);
     this.router.navigateByUrl(`/search/${keyword}`);
@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit {
 
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+   // throw new Error('Method not implemented.');
   }
 }
 
