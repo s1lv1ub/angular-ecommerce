@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../common/cart-item';
 import { Subject } from 'rxjs';
+import e from 'express';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  
 
   cartItems: CartItem[] = [];
 
@@ -70,5 +72,26 @@ export class CartService {
 
     console.log(`totalPrice: ${totalPriceValue.toFixed(2)}, totalQuantity: ${totalQuantityValue}`);
     console.log('----');
+  }
+
+  decrementQuantity(tempCartItem: CartItem) {
+
+    tempCartItem.quantity--;
+
+    if (tempCartItem.quantity === 0) {
+      this.remove(tempCartItem);
+    }else {
+      this.computeCartTotals();
+    }
+  }
+
+  remove(theCartItem: CartItem) {
+    // get index of item in the array
+    const itemIndex = this.cartItems.findIndex( tempCartItem => tempCartItem.id === theCartItem.id );
+    if (itemIndex > -1) {
+      // if we found the item, remove it from the array at the given index
+      this.cartItems.splice(itemIndex, 1);
+      this.computeCartTotals();
+    }
   }
 }
